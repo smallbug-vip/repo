@@ -14,3 +14,12 @@ git commit -m "version name"
 git status   #查看状态
 
 git diff  查看不同
+
+git log
+
+git log --pretty=oneline  #简约版
+
+
+git reset --hard HEAD^
+
+git reset --hard HEAD~100
