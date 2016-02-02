@@ -1,12 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cn.smallbug.sport</groupId>
-	<artifactId>sport</artifactId>
+	<groupId>cn.smallbug</groupId>
+	<artifactId>back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>sport</name>
-
+	<name>back</name>
 	<properties>
 		<spring.version>4.1.8.RELEASE</spring.version>
 	</properties>
@@ -16,7 +15,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>provide</scope>
+			<!-- <scope>provide</scope> -->
 		</dependency>
 
 		<!-- Spring -->
@@ -148,22 +147,83 @@
 		</dependency>
 		<!-- sql driver end -->
 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!--page -->
+		<dependency>
+			<groupId>cn.itcast</groupId>
+			<artifactId>page</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- apache utils begin -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- apache utils end -->
+
+		<!-- log begin -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.9</version>
+		</dependency>
+		<!-- log end -->
+
+		<!--jerson -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20131018</version>
+		</dependency>
 
 	</dependencies>
 
-    <!-- 远程maven库 -->
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+	<pluginRepositories>
+		<pluginRepository>
 			<id>public</id>
 			<name>Public Repositories</name>
-			<url>http://192.168.88.132:8081/nexus/content/groups/public/</url>
-		</repository>
-	</repositories>
+			<url>http://192.168.94.131:8081/nexus/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
-	<!-- 热部署 -->
+	<!-- deploy -->
 	<build>
 		<plugins>
 			<plugin>
@@ -171,7 +231,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://192.168.88.132:8080/manager/text</url>
+					<url>http://192.168.88.131:8080/manager/text</url>
 					<!-- <path>/</path> -->
 					<server>tomcat</server>
 					<username>tomcat</username>
