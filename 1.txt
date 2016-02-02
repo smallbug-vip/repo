@@ -23,3 +23,5 @@ git log --pretty=oneline  #简约版
 git reset --hard HEAD^
 
 git reset --hard HEAD~100
+
+成功了
