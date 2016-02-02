@@ -10,3 +10,7 @@ git config --global user.email "smallbug7758@gmail.com"              # 配置邮
 git add filename
 
 git commit -m "version name"
+
+git status   #查看状态
+
+git diff  查看不同
