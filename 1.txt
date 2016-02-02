@@ -1,1 +1,12 @@
-hello smallbug
+ssh-keygen -t rsa -C "smallbug_vip@163.com"
+
+git config --global user.name "smallbug-vip"                       # 配置用户名
+git config --global user.email "smallbug7758@gmail.com"              # 配置邮件
+
+空文件：git init
+
+创建文件
+
+git add filename
+
+git commit -m "version name"
