@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.smallbug.core.dao.TestTbDao">
+	<!-- 添加测试数据 -->
+	<insert id="addTestTb" parameterType="TestTb">
+		insert into test_tb
+		(name_,birthday_)
+		values
+		(#{name},#{birthday})
+	</insert>
+</mapper>

@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<head> 
+<meta charset=utf-8> 
+<title>HTML5-canvas</title>
+</head>
+<body>
+
+
+<canvas id="ldsun" width="500" height="200" ></canvas>
+
+
+<div id="ds"></div>
+
+<script type="text/javascript">
+	var canvas = document.getElementById('ldsun');
+	var p100=canvas.getContext("2d");
+	var width=400;	 	//设置线条获得区域宽度
+	var height=200; 	//设置线条获得区域高度
+	var start=0 //设置线条起点
+	var exp=1; //设置线条每次移动像素大小
+
+	p100.strokeStyle = "rgba(255,0,0,1)"; //定义颜色
+	function draw(){
+		p100.clearRect(0,0,width,height) 		// 擦除画布一个区域xy、xy
+		p100.fillStyle="blue"; 					//定义颜色
+		p100.beginPath(); 						//从新开始画，防止冲突重叠
+		p100.arc(180,start,20,0,Math.PI*2,1);	 //x坐标，y坐标，半径，Math.PI是圆周率
+		p100.closePath(); 						//结束画布，防止冲突重叠
+		p100.fill(); 							//结束渲染
+		
+		start=start+exp; 	//起点+活动像素位置
+		if(start==0 || start==height-1){ //判断当前线的位置，控制在区域内
+			exp=exp*-1; //乘以负一用来调整线路方向
+		}
+	}
+</script>
+<input onclick="interval=setInterval(draw,5);" value="开始" type="button" />
+<input onclick="clearInterval(interval);" value="停止" type="button" />
+</body> 
+</html>
