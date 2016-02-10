@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE mbeans-descriptors PUBLIC
+ "-//Apache Software Foundation//DTD Model MBeans Configuration File"
+ "http://jakarta.apache.org/commons/dtds/mbeans-descriptors.dtd">
+
+<mbeans-descriptors>
+
+	<mbean name="myMBean" className="cn.smallbug.jdk.jmx._02.BugMBean"
+		type="cn.smallbug.jdk.jmx._02.Bug">
+
+		<attribute name="Name" type="java.lang.String" />
+		<attribute name="Food" type="java.lang.String" />
+		
+		<operation name="eat" impact="ACTION" returnType="void">
+			<parameter name="eat" type="java.lang.String" />
+		</operation>
+		
+		<operation name="toString" impact="ACTION" returnType="java.lang.String">
+			<parameter name="eat" type="java.lang.String" />
+		</operation>
+	</mbean>
+
+</mbeans-descriptors>
