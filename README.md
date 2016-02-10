@@ -9,5 +9,6 @@
           |->lifecycle(抽离tomcat源码之生命周期)
       |->demo
           |->encrypt(二进制文件加密)
+          |->jmx(jmx使用演示)
  |->structure
       |->tomcat(tomcat架构图)
