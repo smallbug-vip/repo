@@ -1,5 +1,5 @@
 << 资源导航 >>
-(文件显示层次：https://raw.githubusercontent.com/smallbug-vip/repo/master/README.md)
+(请点击此链接显示README.md文件的层次：https://raw.githubusercontent.com/smallbug-vip/repo/master/README.md)
 /
  |->README.md
  |->code
