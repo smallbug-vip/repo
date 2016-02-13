@@ -11,5 +11,6 @@
           |->encrypt(二进制文件加密)
           |->jmx(jmx使用演示)
           |->mongodb(mongodb使用演示)
+          |->chat(GUI聊天器——客户端+服务端源码)
  |->structure
       |->tomcat(tomcat架构图)
