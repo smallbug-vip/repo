@@ -12,5 +12,7 @@
           |->jmx(jmx使用演示)
           |->mongodb(mongodb使用演示)
           |->chat(GUI聊天器——客户端+服务端源码)
+      |->pattern
+          |->demo(23种设计模式简单演示代码)
  |->structure
       |->tomcat(tomcat架构图)
