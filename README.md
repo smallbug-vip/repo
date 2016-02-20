@@ -2,7 +2,7 @@
 
 　/  
 　|->[README.md](https://github.com/smallbug-vip/repo/blob/master/README.md)  
-　|->code  
+　|->[code](https://github.com/smallbug-vip/repo/tree/master/code)  
 　　　|->[web](https://github.com/smallbug-vip/repo/tree/master/code/web)  
 　　　　　|->[back](https://github.com/smallbug-vip/repo/tree/master/code/web/back)（ajax异步上传图片webservice转存图片服务器源码）  
 　　　|->[tomcat](https://github.com/smallbug-vip/repo/tree/master/code/tomcat)  
