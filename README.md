@@ -12,6 +12,7 @@
 　　　　　|->[jmx](https://github.com/smallbug-vip/repo/tree/master/code/demo/jmx)(jmx使用演示)  
 　　　　　|->[mongodb](https://github.com/smallbug-vip/repo/tree/master/code/demo/mongodb)(mongodb使用演示)  
 　　　　　|->[chat](https://github.com/smallbug-vip/repo/tree/master/code/demo/chat)(GUI聊天器——客户端+服务端源码)  
+　　　　　|->[json](https://github.com/smallbug-vip/repo/tree/master/code/demo/json)(json与map,list,object之间的转换，jackson工具包的使用测试)  
 　　　|->[pattern](https://github.com/smallbug-vip/repo/tree/master/code/pattern)  
 　　　　　|->[demo](https://github.com/smallbug-vip/repo/tree/master/code/pattern/demo)(23种设计模式简单演示代码)  
 　|->[structure](https://github.com/smallbug-vip/repo/tree/master/structure)  
