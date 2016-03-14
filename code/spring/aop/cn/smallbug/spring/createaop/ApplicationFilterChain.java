@@ -57,6 +57,10 @@ public class ApplicationFilterChain {
 		return filterChainList.size();
 	}
 
+	public FilterChain get(int index) {
+		return filterChainList.get(index);
+	}
+
 	public int index() {
 		return index;
 	}
@@ -101,7 +105,7 @@ public class ApplicationFilterChain {
 			return obj;
 		}
 		// 获取过滤链中当前索引所指向的节点
-		FilterChain f = this.filterChainList.get(this.index);
+		FilterChain f = chain.get(chain.index);
 		Object obj = null;
 		f.before(target, matchers);
 		// 过滤链中当前索引+1
