@@ -21,4 +21,4 @@
 　　　　|->[tomcat](https://github.com/smallbug-vip/repo/tree/master/structure/tomcat)(tomcat架构图)  
 　|->[note](https://github.com/smallbug-vip/repo/tree/master/note)  
 　　　|->[linux](https://github.com/smallbug-vip/repo/tree/master/note/linux)  
-　　　　　|->[鸟哥Linux私房菜笔记](https://github.com/smallbug-vip/repo/tree/master/note/linux/note.html)  
+　　　　　|->[鸟哥Linux私房菜笔记](https://github.com/smallbug-vip/repo/tree/master/note/linux/note.mjs)  
