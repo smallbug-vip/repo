@@ -100,11 +100,15 @@ poweroff	关机
 	K 开头表示不运行
 	S 开头表示运行
 
+multi-user.target 		第3运行级
+graphical.target 		第5运行级
 1，设置开机模式为：命令模式
 	systemctl set-default multi-user.target
+	ln -sf /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
 2,设置开机模式为：图形模式
 	systemctl set-default graphical.target
+	ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 
 runlevel  //显示当前环境级别
 
@@ -958,50 +962,500 @@ diff 		判断两个文件是否相同
 
 xargs 		让ls类似的不能使用管道的命令使用管道
 
+#####################################################################################################
+									第十二章 正则表达式
+#####################################################################################################
+
+. 		一个字符
+[]
+^或\<		开头
+$或\>		结束
+to\{4,9\} 	范围
+
 -----------------------------------------
+
+sed '1,2d' hosts 		删除前两行
+	-i 		直接修改文件，默认是输出到控制台
+	-e 		同时可以做多个操作，一个操作写一个-e
+	-f 		调用文件中的内容
+
+sed '$d' hosts  		删除最后一行
+
+sed 's/root/ROOT/g' xx 		将root转换为ROOT
+
+sed '/adm/ixxxxxxxxxxxxxx' xx 			在adm的上一行添加xxxxxxxxxxxxxx
+
+sed '/adm/axxxxxxxxxxxxxx' xx 			在adm的下一行添加xxxxxxxxxxxxxx
+
+sed '/adm/cxxxxxxxxxxxxxx' xx 			将adm行换掉xxxxxxxxxxxxxx
+
 -----------------------------------------
+
+awt -F: '{print $1}' xx 	以:为切分附（默认是空格）将xx文件切分，然后取第一部分。0表示整行记录
+
+'{print NR, $1, NF}' 		NR添加行号，NF是显示该行有几个字段
+
+awt -F: '$3<=1 {print $1}' xx 		前面 $3<=1 是条件
+
+awk -F: 'BEGIN{OFS="\t\t"; ORS="\n\n"}{print $1 $2}' xx
+					OFS表示每一部分是用什么分隔符（tab键），ORS表示每行之间使用什么分隔符
+
+#####################################################################################################
+									第十三章 学习shell script
+#####################################################################################################
+
+#!/bin/bash
+
+read -p "pleace input word:" name
+echo "you input:"$name
+
+$REPLY #默认变量
+
+declare -i aa #定义整型，目的是可以做数值运算，默认情况下会直接输出
+let bb=1+8 		同上
+cc=((1+1)) 		同上
+
+echo $?   #返回值，1(非0不正确)0(正确)
+
+
 -----------------------------------------
+
+运行
+	./xx.sh 		开启子shell运行
+	bash xx.sh 		开启子shell运行
+	source xx.sh 	当前shell下运行
+
 -----------------------------------------
+
+比较
+
+            数字            字符
+等于        -eq              ==
+大于        -gt              >
+大于等于    -ge              >=
+小于        -lt              <
+小于等于    -le              <=
+
+aa=3
+bb=4
+test $aa -eq bb
+
+[ $aa -gt $bb ] 	作用同上
+
 -----------------------------------------
+
+[ -f /etc/passwd ]   #判断文件是否存在（存在返回0）
+[ -r /etc/passwd ]   #判断文件是否有读权限
+[ -w /etc/passwd ]   #判断文件是否有写权限
+[ -x /etc/passwd ]   #判断文件是否有执行权限
+
 -----------------------------------------
+
+判断一个用户是否存在
+
+#!/bin/bash
+grep -q ^$1 /etc/passwd   #-q 不显示结果
+if  [ "$?" -eq 0 ]; then
+	echo "$1 存在"
+elif  []; then
+else
+	echo "$1 不存在"
+fi
+
 -----------------------------------------
+
+set -x  #排错
+
 -----------------------------------------
+
+case
+
+case $1 in
+		[Tt]o*)
+			echo tom
+			;;
+		bob | mary )
+			echo xxx
+			;;
+		*)
+			echo zzz
+			;;
+esac
+
 -----------------------------------------
+
+输出提示信息
+
+cat <<END
+	1) tom
+	2) bob
+	3) mary
+END
+
 -----------------------------------------
+
+选择执行命令
+
+select xx in 'ls -l' pwd date
+do
+	$xx
+done
+
 -----------------------------------------
+
+定义函数的两种形式
+
+function xx (){
+	echo "hello"
+}
+
+xx (){
+	echo "hello"
+}
+
 -----------------------------------------
+
+while []
+do
+	$xx
+done
+
 -----------------------------------------
+
+until与while相反，一开始不满足，直到满足之后就会跳出循环
+
 -----------------------------------------
+
+for xx in aa,bb cc
+do 
+done
+
+#####################################################################################################
+									第十四章 Linux账号管理与ACL权限设置
+#####################################################################################################
+
+/etc/passwd	//用户的所有信息放在该文件中
+/etc/shadow	//用户密码存放在该文件中
+/etc/group 	//用户组放在该文件中
+
 -----------------------------------------
+
+uid标志一个用户
+每一个UID对应一个用户，root的UID是0，1~499是系统用户UID，500~65535是普通用户
+passwd  每一行是6个冒号分成7部分
+repository:x:1000:1000:repository:/home/repository:/bin/bash
+用户名:密码占位符:UID:GID:注释信息:家目录:shell信息
+
 -----------------------------------------
+
+groupadd bob   //添加一个组
+groupdel bob   //删除一个组
+
+gpasswd -a smallbug root   //将repository添加到root组中
+		-d 删除
+
+groups smallbug 		查看smallbug用户的所属组
+
+newgrp root //临时切换默认组(exit可恢复到原状态)
+
 -----------------------------------------
+
+useradd			添加用户
+	-D  查看创建用户时的默认值
+	-c "注释"
+	-s  制指定shell
+	-d  家目录
+	-g  组（不创建组，只分配到默认组）
+	-G  root 除了创建本组外还会将用户添加到root组中
+	-u  UID
+
+	useradd -r -g mysql -s /bin/mysql_shell -M mysql
+
+	vim /etc/default/useradd    修改默认值
+
+	/sbin/nologin 		只能登陆服务不能登陆主机
+
+usermod -c "修改用户信息" repository
+
+userdel -r 删除用户
+
+
+usermod 		可用来修改用户帐号的各项设定。
+	　-c<备注> 　修改用户帐号的备注文字。 
+	　-d登入目录> 　修改用户登入时的目录。 
+	　-e<有效期限> 　修改帐号的有效期限。 
+	　-f<缓冲天数> 　修改在密码过期后多少天即关闭该帐号。 
+	　-g<群组> 　修改用户所属的群组。 
+	　-G<群组> 　修改用户所属的附加群组。 
+	　-l<帐号名称> 　修改用户帐号名称。 
+	　-L 　锁定用户密码，使密码无效。 
+	　-s<shell> 　修改用户登入后所使用的shell。 
+	　-u<uid> 　修改用户ID。 
+	　-U 　解除密码锁定。
+
 -----------------------------------------
+
+查看系统中有哪些用户：cut -d : -f 1 /etc/passwd
+查看可以登录系统的用户：cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1
+查看用户登录历史记录：last
+
 -----------------------------------------
+
+password smallbug 		修改smallbug的密码
+
+sudo passwd -S smallbug 	查看smallbug密码的加密方式
+
+passwd -S repositpry   //查看密码信息
+
+passwd -d repository   //清空密码
+		-l //锁定账号信息（=usermod -L smallbug）
+		-u  //解锁（=usermod -U smallbug）
+
+echo $xx | passwd --stdin tom 		脚本方式修改密码
+
+
 -----------------------------------------
+
+[tom@smallbug smallbug]$ id tom
+uid=1001(tom) gid=1001(tom) groups=1001(tom)
+
 -----------------------------------------
+
+ACL 	访问控制列表
+
+查看权限
+
+[smallbug@smallbug Chapter03]$ getfacl testString.cpp 
+# file: testString.cpp
+# owner: smallbug
+# group: smallbug
+user::rw-
+group::rw-
+other::r--
+
 -----------------------------------------
+
+修改权限
+setfacl -m u:tom:r-- a.out
+		   g:对组操作
+取消
+setfacl -x u:tom xx
+
 -----------------------------------------
+
+在/home目录下创建的所有文件对tom都有默认的r--权限
+setfacl -m d:u:tom:r-- /home
+		     g:对组操作
+取消
+setfacl -x d:u:tom /home
+
 -----------------------------------------
+
+PAM
+	/etc/pam.d/ 		ssh等模块本身并没有验证功能，它会去这个文件夹下查看对应的pam配置文件
+
+	/lib/security/ 		找到之后会去这个文件加下找对应的执行程序
+
+	/usr/share/doc/pam-1.1.8/txts/ 		这个文件夹下记录了那些程序的具体用法
+
 -----------------------------------------
+
+who 	当前有哪些用户登录
+
 -----------------------------------------
+
+last 		什么时间哪个用户在哪个ip上登陆过，机器重启时间
+
 -----------------------------------------
+
+mesg 	查看是否开启信息功能（即使关闭，root发送的信息也可看到）
+
+w 	产看查看当前在线用户
+
+write tom pts/3 		写信息
+		lnfiewhfuhqwu
+
+#####################################################################################################
+								第十五章 磁盘配额(Quota)与高级文件系统管理
+#####################################################################################################
+
+
+#####################################################################################################
+								第十七章 程序管理与SELinux初探
+#####################################################################################################
+
+jobs 		查看后台进程
+
 -----------------------------------------
+
+bg 1 		运行后台进程
+
 -----------------------------------------
+
+fg 1 			将进程重新调到前台
+
 -----------------------------------------
+
+kill -9 %1 		杀死后台进程号为1的进程
+
+kill -l  查看所有信号
+
+killall -9 java   直接杀死进程
+
 -----------------------------------------
+
+nohup ping www.baidu.com & 		让进程脱机管理，关闭远程客户端程序依然在运行
+
 -----------------------------------------
+
+ps -l		当前shell运行的程序
+
+ps -aux 	显示所有进程，所有者，详细信息
+
+ps -ex -o comm,%cpu    查看进程名及对应的CPU使用情况
+			   %mem   内存使用率
+			   pid    显示pid
+			   stat    显示进程状态
+			   		R 正在运行
+			   		Z 僵尸状态
+			   		T 停止状态
+			   		S 睡眠状态
+
 -----------------------------------------
+
+ pidof  bash 		查看某一个PID是多少
+
 -----------------------------------------
+
+top  动态显示资源使用状态
+
+top -d 1   一秒钟刷新一次状态
+
 -----------------------------------------
+
+优先级=优先系数+nice值（-20~19）（最高~最低）
+
+1> 在top中r修改nice值，改变进程优先级
+
+2> PID to renice [default pid = 25593]
+
+3> Renice PID 23369 to value -12
+
 -----------------------------------------
+
+renice -20 2061   修改PID为2061的进程将其nice值改成-20
+
 -----------------------------------------
+
+nice -n -19  cat  以nice值为-19来运行cat命令
+
 -----------------------------------------
+
+free -m   以M的形式显示内存及交换分区的使用情况
+
 -----------------------------------------
+
+uptime  当前时间，系统运行时间，连接用户，系统负荷
+
 -----------------------------------------
+
+vmstat 1 3     1s执行一次，执行3次  系统资源状态
+
 -----------------------------------------
+
+netstat -ntul    查看有哪些端口处于监听状态(n:做反向解析)
+
 -----------------------------------------
+
+pstree -u  显示进程树
+
+#####################################################################################################
+								第十八章 程序管理与SELinux初探
+#####################################################################################################
+
+独立服务所在位置：/etc/init.d
+
+非独立服务：xinetd
+
+chkconfig    设置开机时服务是否启动
+
+#####################################################################################################
+										软件管理
+#####################################################################################################
+
+安装源码包之前先安装gcc
+
+安装未指定目录默认路径是 /usr/local
+./configure --prefix=/opt/XXX   指明安装目录
+
+生成makeFile文件之后 make
+
+make install
+
+安装htop源码包
+	错误：You may want to use --disable-unicode or install libncursesw
+	方法：yum install ncurses-devel
+
 -----------------------------------------
+
+rpm：
+	-ivh  i安装 v显示过程  h调用数字签名（--force强制安装）
+	-qa   查看当前系统所安装的所有软件包
+	-ql   查看软件安装目录
+	-qc   查看软件安装配置文件
+	-qd   查看帮助文档
+	-qi   查看详细信息
+	-qf   查看该软件由哪个软件包安装的
+	-K    验证rpm包是否是官方原版（rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7）
+	-qlp  查看rpm包的安装目录
+	-e    卸载软件 （--nodeps  忽略软件包的依赖关系）
+	-Uvh  更新软件
+	--test                            安装测试，并不实际安装
+	--replacepkge                    无论软件包是否已被安装，都强行安装软件包
+
 -----------------------------------------
+
+yum [options] [command] [package ...]
+
+	-h 		帮助
+	-y 		当安装过程提示选择全部为"yes"
+	-q 		不显示安装的过程
+
+yum install yum-fastestmirror 		自动搜索最快镜像插件
+
+yum install yumex 					安装yum图形窗口插件
+
+yum grouplist 						查看可能批量安装的列表
+
+1 安装
+	yum install 全部安装
+	yum install package1 安装指定的安装包package1
+	yum groupinsall group1 安装程序组group1
+
+2 更新和升级
+	yum update 全部更新
+	yum update package1 更新指定程序包package1
+	yum check-update 检查可更新的程序
+	yum upgrade package1 升级指定程序包package1
+	yum groupupdate group1 升级程序组group1
+
+3 查找和显示
+	yum info package1 显示安装包信息package1
+	yum list 显示所有已经安装和可以安装的程序包
+	yum list package1 显示指定程序包安装情况package1
+	yum groupinfo group1 显示程序组group1信息yum search string 根据关键字string查找安装包
+
+4 删除程序
+	yum remove &#124; erase package1 删除程序包package1
+	yum groupremove group1 删除程序组group1
+	yum deplist package1 查看程序package1依赖情况
+
+5 清除缓存
+	yum clean packages 清除缓存目录下的软件包
+	yum clean headers 清除缓存目录下的 headers
+	yum clean oldheaders 清除缓存目录下旧的 headers
+	yum clean, yum clean all (= yum clean packages; yum clean oldheaders) 清除缓存目录下的软件包及旧的headers
+	
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
