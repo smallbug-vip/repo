@@ -1,4 +1,4 @@
-### << 资源导航 >>  
+## << 资源导航 >>  ##
 
 　/  
 　|->[README.md](https://github.com/smallbug-vip/repo/blob/master/README.md)  
@@ -46,4 +46,9 @@
 　　　|->[spring](https://github.com/smallbug-vip/repo/tree/master/backups/spring)  
 　　　　　|->[aop](https://github.com/smallbug-vip/repo/tree/master/backups/spring/aop) (SpringAOP小实现)  
 　|->[structure](https://github.com/smallbug-vip/repo/tree/master/structure)  
-　　　|->[tomcat](https://github.com/smallbug-vip/repo/tree/master/structure/tomcat) (tomcat架构图)  
+　　　|->[tomcat](https://github.com/smallbug-vip/repo/tree/master/structure/tomcat) (tomcat架构图)　
+
+
+----------
+  
+### 首页索引不经常更新，实际内容请以实际代码为主 ###
