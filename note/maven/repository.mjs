@@ -1,0 +1,82 @@
+<repositories>
+		<repository>
+			<id>jboss</id>
+			<name>Jboss Repository</name>
+			<url>http://repository.jboss.com/maven2</url>
+		</repository>
+		<repository>
+			<id>sonatype</id>
+			<name>sonatype Repository</name>
+			<url>http://repository.sonatype.org/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>logicaldoc</id>
+			<name>LogicalDOC Repository</name>
+			<url>http://logicaldoc.sourceforge.net/maven</url>
+		</repository>
+		<repository>
+			<id>repo1</id>
+			<name>repositories_2</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>kafeitu</id>
+			<url>http://maven.kafeitu.me/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>Activiti</id>
+			<url>https://maven.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>Codehaus</id>
+			<url>http://repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spy</id>
+			<name>Spy Repository</name>
+			<url>http://files.couchbase.com/maven2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>xerces</id>
+			<name>xerces</name>
+			<url>https://xerces.apache.org/xerces2-j/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>proxool</id>
+			<name>proxool</name>
+			<url>http://proxool.cvs.sourceforge.net/viewvc/proxool/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>jeecg</id>
+			<name>jeecg Repository</name>
+			<url>http://maven.jeecg.org/nexus/content/repositories/jeecg</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>osc</id>
+			<name>oschina</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>

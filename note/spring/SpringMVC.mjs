@@ -1,0 +1,5 @@
+SpringMCV实现过程：
+	1> Spring会在ContextLoaderListener中获取Context中封装的数据，根据这些数据来初始化基于WEB环境的IOC环境。然后将IOC环境设置到ServletContext中。
+	2> ServletDispatcher会将之前ContextIOC作为父容器，初始化自己的IOC容器环境，这个也相当于是一个基于Servlet的容器，一个是基于Context的容器。
+	3> 当ServletDispatcher接到一个请求时首先会创建一个ModelAndView对象，会从Mapping中获取一个handlerChain，调用handlerChain填充ModelAndView对象
+	4> 将ModelAndView对象交给视图解析器，让视图解析器解析并回显数据到界面

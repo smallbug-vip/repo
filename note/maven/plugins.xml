@@ -1,0 +1,80 @@
+<!-- 打成可运行包jar包 ;命令：install-->
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<configuration>
+		<archive>
+			<manifest>
+				<addClasspath>true</addClasspath>
+				<classpathPrefix>lib/</classpathPrefix>
+				<!--指明main方法所在的类 -->
+				<mainClass>edu.hpc.its.area.core.Bootstrap</mainClass>
+			</manifest>
+		</archive>
+	</configuration>
+</plugin>
+
+<!-- 打包不测试 -->
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<configuration>
+		<skipTests>true</skipTests>
+	</configuration>
+</plugin>
+
+<!-- 从本地Maven仓库复制到某个特定的文件夹下面 ;命令：dependency:copy-dependencies -->
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-dependency-plugin</artifactId>
+	<executions>
+		<execution>
+			<id>copy</id>
+			<phase>package</phase>
+			<goals>
+				<goal>copy-dependencies</goal>
+			</goals>
+			<configuration>
+				<outputDirectory>
+					./target/lib
+				</outputDirectory>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+
+<!-- 配置使用的jdk版本-->
+<plugin>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.2</version>
+	<configuration>
+		<source>1.7</source>
+		<target>1.7</target>
+	</configuration>
+</plugin>
+
+<!-- Tomcat热部署 ; 命令：tomcat7:deploy-->
+<plugin>
+	<groupId>org.apache.tomcat.maven</groupId>
+	<artifactId>tomcat7-maven-plugin</artifactId>
+	<version>2.2</version>
+	<configuration>
+		<port>9090</port>
+		<path>/elec</path>
+		<uriEncoding>UTF-8</uriEncoding>
+		<url>http://localhost:8082/manager/html</url>
+		<server>tomcat</server>
+	</configuration>
+</plugin>
+
+<!-- 打war包，命令：install -->
+<plugins>
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-war-plugin</artifactId>
+		<version>2.0.2</version>
+		<configuration>
+			<warName>center</warName>
+		</configuration>
+	</plugin>
+</plugins>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <!-- Server即Catalina servlet组件，它是server.xml的最外层元素 -->
+  <!-- 常用属性：-->
+  <!-- Address：Tomcat监听shutdown命令的地址，默认为localhost  -->
+  <!-- className：指定实现org.apache.catalina.Server接口的类，默认值为org.apache.catalina.core.StandardServer-->
+  <!-- port:Tomcat监听shutdown命令的端口。设置为-1，则禁止通过端口关闭Tomcat，同时shutdown.bat也不能使用-->
+  <!-- shutdown：通过指定的地址（Address）、端口（port）关闭Tomcat所需的字符串。修改shutdown的值，对shutdown.bat无影响-->
+
+  <Server port="8005" shutdown="SHUTDOWN">
+
+
+  <!-- Listener即监听器，负责监听特定的事件，当特定事件触发时，Listener会捕捉到该事件，并做出相应处理。Listener通常用在Tomcat的启动和关闭过程。Listener可嵌在Server、Engine、Host、Context内-->
+
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener"/>
+  <!-- 安全监听器. 先关资料在 /docs/config/listeners.html
+  <Listener className="org.apache.catalina.security.SecurityListener" />
+  -->
+  <!--APR库装入器. 先关资料在 /docs/apr.html -->
+  <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/>
+  <!--初始化Jasper在webapps之前加载. 先关资料在 /docs/jasper-howto.html -->
+  <Listener className="org.apache.catalina.core.JasperListener"/>
+  <!-- 防止内存泄露-->
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+  <!-- 全局资源监视-->
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+  <!-- 避免本地线程有关的内存泄露-->
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener"/>
+
+
+  <!-- 用于配置JNDI -->
+  <GlobalNamingResources>
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users
+    -->
+    <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+  </GlobalNamingResources>
+
+
+  <!-- Service包装Executor、Connector、Engine，以组成一个完整的服务 -->
+  <!-- 常用属性：-->
+  <!-- className：指定实现org.apache.catalina.Service接口的类，默认值为 org.apache.catalina.core.StandardService-->
+  <!-- name：Service的名字 -->
+  <Service name="Catalina">
+
+
+  <!-- Executor即Service提供的线程池，供Service内各组件使用 -->
+  <!-- 常用属性：-->
+  <!-- className：指定实现org.apache.catalina.Executor接口的类，默认值为：org.apache.catalina.core. StandardThreadExecutor-->
+  <!-- name：线程池的名字-->
+  <!-- daemon：是否为守护线程，默认值为true-->
+  <!-- maxIdleTime：总线程数高于minSpareThreads时，空闲线程的存活时间（单位：ms），默认值为60000，即1min-->
+  <!-- maxQueueSize：任务队列上限，默认值为Integer.MAX_VALUE(（2147483647），超过此值，将拒绝-->
+  <!-- maxThreads：线程池内线程数上限，默认值为200-->
+  <!-- minSpareThreads：线程池内线程数下限，默认值为25-->
+  <!-- namePrefix：线程名字的前缀。线程名字通常为namePrefix+ threadNumber-->
+  <!-- prestartminSpareThreads：是否在Executor启动时，就生成minSpareThreads个线程。默认为false-->
+  <!-- threadPriority：Executor内线程的优先级，默认值为5（Thread.NORM_PRIORITY）-->
+  <!-- threadRenewalDelay－重建线程的时间间隔。重建线程池内的线程时，为了避免线程同时重建，每隔threadRenewalDelay（单位：ms）重建一个线程。默认值为1000，设置为负则不重建-->
+  <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+        maxThreads="150" minSpareThreads="4"/>
+
+
+  <!-- Connector是Tomcat接收请求的入口，每个Connector有自己专属的监听端口 -->
+  <!-- Connector有两种：HTTP Connector和AJP Connector -->
+  <!-- 常用属性： -->
+  <!-- port：Connector接收请求的端口-->
+  <!-- protocol：Connector使用的协议（HTTP/1.1或AJP/1.3）-->
+  <!-- connectionTimeout：每个请求的最长连接时间（单位：ms）-->
+  <!-- redirectPort：处理http请求时，收到一个SSL传输请求，该SSL传输请求将转移到此端口处理-->
+  <!-- executor：指定线程池-->
+  <!-- 如果没设置executor，可在Connector标签内设置maxThreads（默认200）、minSpareThreads（默认10）
+acceptCount－Connector请求队列的上限。默认为100。当该Connector的请求队列超过acceptCount时，将拒绝接收请求-->
+  <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+  <Connector port="8009" protocol="AJP/1.3" redirectPort="8443"/>
+
+
+  <!-- Engine负责处理Service内的所有请求。它接收来自Connector的请求，并决定传给哪个Host来处理，Host处理完请求后，将结果返回给Engine，Engine再将结果返回给Connector -->
+  <!-- 常用属性：-->
+  <!-- name：Engine的名字-->
+  <!-- defaultHost：指定默认Host。Engine接收来自Connector的请求，然后将请求传递给defaultHost，defaultHost 负责处理请求-->
+  <!-- className：指定实现org.apache.catalina. Engine接口的类，默认值为org.apache.catalina.core. StandardEngine -->
+  <!-- backgroundProcessorDelay：Engine及其部分子组件（Host、Context）调用backgroundProcessor方法的时间间隔。backgroundProcessorDelay为负，将不调用backgroundProcessor。backgroundProcessorDelay的默认值为10-->
+  <!-- 注：Tomcat启动后，Engine、Host、Context会启动一个后台线程，定期调用backgroundProcessor方法。backgroundProcessor方法主要用于重新加载Web应用程序的类文件和资源、扫描Session过期-->
+  <!-- jvmRoute：Tomcat集群节点的id。部署Tomcat集群时会用到该属性，-->
+    <Engine defaultHost="localhost" name="Catalina">
+
+
+      <!-- Tomcat集群配置 -->
+      <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
+
+
+      <!-- Realm可以理解为包含用户、密码、角色的”数据库”。Tomcat定义了多种Realm实现：JDBC Database Realm、DataSource Database Realm、JNDI Directory Realm、UserDatabase Realm等-->
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+      </Realm>
+
+
+  <!-- Host负责管理一个或多个Web项目，对应到域名-->
+  <!-- 常用属性：-->
+  <!-- name：Host的名字-->
+  <!-- appBase：存放Web项目的目录（绝对路径、相对路径均可）-->
+  <!-- unpackWARs：当appBase下有WAR格式的项目时，是否将其解压（解成目录结构的Web项目）。设成false，则直接从WAR文件运行Web项目-->
+  <!-- autoDeploy：是否开启自动部署。设为true，Tomcat检测到appBase有新添加的Web项目时，会自动将其部署-->
+  <!-- startStopThreads：线程池内的线程数量。Tomcat启动时，Host提供一个线程池，用于部署Web项目，startStopThreads为0，并行线程数=系统CPU核数 -->
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+
+
+      <!-- Valve可以理解为Tomcat的拦截器，而我们常用filter为项目内的拦截器。Valve可以用于Tomcat的日志、权限等。Valve可嵌在Engine、Host、Context内-->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
+
+
+      <!-- Context代表一个运行在Host上的Web项目。一个Host上可以有多个Context -->
+      <!-- 常用属性：-->
+      <!-- path：该Web项目的URL入口-->
+      <!-- docBase：eb项目的路径，绝对路径、相对路径均可-->
+      <!-- reloadable－设置为true，Tomcat会自动监控Web项目的/WEB-INF/classes/和/WEB-INF/lib变化，当检测到变化时，会重新部署Web项目。reloadable默认值为false。通常项目开发过程中设为true，项目发布的则设为false-->
+      <!-- rossContext－设置为true，该Web项目的Session信息可以共享给同一host下的其他Web项目。默认为false-->
+      <Context docBase="small_bug" path="/small_bug" reloadable="true" /></Host>
+    </Engine>
+  </Service>
+</Server>

@@ -1,0 +1,20 @@
+
+入口：org.apache.catalina.startup.Bootstrap类中mian()
+
+org.apache.catalina.startup.Bootstrap.mian() 调用org.apache.catalina.startup.Bootstrap.init();
+
+init(){
+	this.setCatalinaHome(){
+		System.setProperty("catalina.home", System.getProperty("user.dir"));
+	}
+	this.setCatalinaBase(){
+		 System.setProperty("catalina.base", System.getProperty("catalina.home"));
+	}
+	this.initClassLoaders(){
+		catalinaLoader = createClassLoader("server", commonLoader);	//用catalinaHome路径及该路径下的jar文件建立类加载器，
+        sharedLoader = createClassLoader("shared", commonLoader);
+	}
+	org.apache.catalina.startup.Catalina.setParentClassLoader(classLoader);	//reflex
+}
+
+
