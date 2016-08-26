@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
 
-	<import resource="./spring/redis.xml" />
-<!-- 	<import resource="./spring/testload.xml" /> -->
+	<!-- <import resource="./spring/spring-redis.xml" /> -->
+	<import resource="./spring/spring-ehcache.xml" />
+	<!-- <import resource="./spring/testload.xml" /> -->
 </beans>
