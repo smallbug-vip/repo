@@ -102,14 +102,6 @@ git config --global user.name "smallbug-vip"                       # 配置用�
 git config --global user.email "smallbug7758@gmail.com"              # 配置邮件
 
 
-
-
-ssh-keygen -t rsa -C "i-jiashuomeng@pptv.com"
-
-git config --global user.name "jiashuomeng"                       # 配置用户名
-git config --global user.email "i-jiashuomeng@pptv.com"              # 配置邮件
-
-
 空文件：git init
 
 创建文件
@@ -232,27 +224,8 @@ git push
 
 4. QA测试完毕之后方才把开发分支merge到master分支上
 
-redis-cli -h kvdblvs1.bjjxq.idc.pplive.cn -p 19380
-
-
-
-vipbackend <--test
-
-1> vipbackend_sprint52_jiashuomeng_daypay   http://pha.pptv.com/D8417
-2> vipbackend_sprint52_jiashuomeng_mobilesuggest   http://pha.pptv.com/D8483
-3> vipbackend_sprint52_jiashuomeng_orderquery    http://pha.pptv.com/D8608
-4> vipbackend_sprint52_jiashuomeng_statement     http://pha.pptv.com/D8692
-5> vipbackend_sprint52_jiashuomeng_pricingmanagement  http://pha.pptv.com/D8736
-6> vipbackend_sprint52_jiashuomeng_vipquery    http://pha.pptv.com/D8829  <--master
-7> vipbackend_sprint52_jiashuomeng_payrecordquery      http://pha.pptv.com/D9024
-8> vipbackend_sprint52_jiashuomeng_channelaccount
-
-
 
 git diff --cached master>/d/git/diff/diff.patch
 
-
-
 git diff HEAD^>/d/git/diff/d.patch
 
-8> vipbackend_sprint52_jiashuomeng_updatecard
