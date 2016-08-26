@@ -80,7 +80,6 @@ public class JacksonTest {
 	 */
 	@Test
 	public void json2obj() {
-
 		String json = "{'id':1,'name':'hoojo','email':'hoojo_@126.com','address':'china-Guangzhou','birthday':{'date':1472103545495}}";
 		AccountBean acc = JacksonUtil.json2Obj(json, AccountBean.class);
 		System.out.println(acc);
