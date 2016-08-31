@@ -7,6 +7,6 @@
 
 
 	<!-- <import resource="./spring/spring-redis.xml" /> -->
-	<import resource="./spring/spring-ehcache.xml" />
-	<!-- <import resource="./spring/testload.xml" /> -->
+<!-- 	<import resource="./spring/spring-ehcache.xml" /> -->
+	<import resource="./spring/spring-aop.xml" />
 </beans>

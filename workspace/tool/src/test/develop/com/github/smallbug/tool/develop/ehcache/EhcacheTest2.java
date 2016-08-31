@@ -26,6 +26,7 @@ public class EhcacheTest2 extends AbstractJunit {
 	public void test01() {
 		cacheManager.getCache("levelOneCache").put(new Element("test", "testxxx"));
 		System.out.println(levelOneCache.get("test").getObjectValue());
+		levelOneCache.flush();
 	}
 
 }

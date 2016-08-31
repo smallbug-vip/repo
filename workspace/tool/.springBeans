@@ -10,6 +10,7 @@
 		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/spring/spring-redis.xml</config>
 		<config>src/main/resources/spring/spring-ehcache.xml</config>
+		<config>src/main/resources/spring/spring-aop.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
