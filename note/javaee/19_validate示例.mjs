@@ -167,3 +167,26 @@
 	</div>
 </body>
 </html>
+
+
+
+
+@ResponseBody
+@RequestMapping("isrepeat")
+public boolean isRepeat(@RequestParam(value = "operate") String operate,
+		@RequestParam(value = "userName", required = false) String userName,
+		@RequestParam(value = "id", required = false) Long id) {
+	if ("save".equals(operate)) {
+		VipPayAccount account = vipPayAccountService.getAccountByUserName(userName);
+		if (account != null)
+			return false;
+	}
+	else if ("update".equals(operate)) {
+		if (id == null)
+			return false;
+		VipPayAccount account = vipPayAccountService.getAccountByUserName(userName);
+		if (account != null && account.getId().longValue() != id.longValue())
+			return false;
+	}
+	return true;
+}

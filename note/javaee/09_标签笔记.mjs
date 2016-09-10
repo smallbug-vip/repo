@@ -307,3 +307,9 @@ Lesson 3
 			constraint u_id_fk foreign key(u_id) references user(id),
 			constraint r_id_fk2 foreign key(r_id) references role(id)
 		);
+------------------------------------------------------------------------------------------------
+
+<jsp:useBean id="statMap" class="java.util.LinkedHashMap" scope="request"></jsp:useBean>
+<c:set target="${statMap }" property="2" value="所有"></c:set>
+<c:set target="${statMap }" property="0" value="有效"></c:set>
+<c:set target="${statMap }" property="1" value="过期"></c:set>

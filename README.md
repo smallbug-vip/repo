@@ -8,6 +8,7 @@
 　　　　　　　|->[jackson](https://github.com/smallbug-vip/repo/tree/master/workspace/tool/src/test/develop/com/github/smallbug/tool/develop/jackson)(封装jackson工具包所提供的方法)  
 　　　|->[structure](https://github.com/smallbug-vip/repo/tree/master/workspace/structure)  
 　　　|->[back](https://github.com/smallbug-vip/repo/tree/master/workspace/back)  
+　　　|->[jscript](https://github.com/smallbug-vip/repo/tree/master/workspace/jscript)   
 　|->[note](https://github.com/smallbug-vip/repo/tree/master/note)  
 　　　|->[linux](https://github.com/smallbug-vip/repo/tree/master/note/linux)  
 　　　|->[javaee](https://github.com/smallbug-vip/repo/tree/master/note/javaee)  
