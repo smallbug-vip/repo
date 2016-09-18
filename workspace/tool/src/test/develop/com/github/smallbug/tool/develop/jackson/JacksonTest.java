@@ -34,7 +34,7 @@ public class JacksonTest {
 	@Test
 	public void obj2json() {
 		ObjectMapperProperty p = new ObjectMapperProperty();
-		p.setFilter(JacksonUtil.getExceptPropertyFilter(bean, true, "email"))//
+		p.setFilter(JacksonUtil.getExceptPropertyFilter(AccountBean.class, false, "email"))//
 				.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
 		String s = JacksonUtil.obj2Json(bean, JacksonUtil.JSONP, null, p);
@@ -67,12 +67,14 @@ public class JacksonTest {
 
 	@Test
 	public void obj2json4() {
-
+		ObjectMapperProperty p = new ObjectMapperProperty();
+		p.setFilter(JacksonUtil.getExceptPropertyFilter(AccountBean.class, true, "email", "name"));
+		p.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 		List<AccountBean> list = new ArrayList<AccountBean>();
 		for (int i = 0; i < 10; i++) {
 			list.add(bean);
 		}
-		System.out.println(JacksonUtil.obj2Json(list, "json", null));
+		System.out.println(JacksonUtil.obj2Json(list, "json", null, p));
 	}
 
 	/**

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
  * @timestamp 2016年8月25日 上午10:20:47
  * @author i-jiashuomeng
  */
+@SuppressWarnings("deprecation")
 public class JacksonUtil {
 
 	public static final String JSON = "json";
@@ -89,12 +90,12 @@ public class JacksonUtil {
 	 *            哪些字段不需要转化（或者只需要转换那些字段）
 	 * @return
 	 */
-	public static FilterProvider getExceptPropertyFilter(Object obj, boolean notExcept, String... argus) {
+	public static FilterProvider getExceptPropertyFilter(Class<?> clazz, boolean notExcept, String... argus) {
 		SimpleFilterProvider provider = new SimpleFilterProvider();
 		if (notExcept)
-			provider.addFilter(obj.getClass().getName(), SimpleBeanPropertyFilter.filterOutAllExcept(argus));
+			provider.addFilter(clazz.getName(), SimpleBeanPropertyFilter.filterOutAllExcept(argus));
 		else
-			provider.addFilter(obj.getClass().getName(), SimpleBeanPropertyFilter.serializeAllExcept(argus));
+			provider.addFilter(clazz.getName(), SimpleBeanPropertyFilter.serializeAllExcept(argus));
 		provider.setFailOnUnknownId(false);
 		return provider;
 	}
@@ -369,15 +370,17 @@ public class JacksonUtil {
 		if (prop.getDateFormat() != null)
 			mapper.setDateFormat(prop.getDateFormat());
 		if (prop.getFilter() != null) {
-			mapper.setFilters(prop.getFilter());
 			mapper.setAnnotationIntrospector(new JacksonAnnotationIntrospector() {
+
 				private static final long serialVersionUID = 1L;
 
 				@Override
-				public Object findFilterId(AnnotatedClass ac) {
-					return ac.getName();
+				public Object findFilterId(Annotated a) {
+					return a.getName();
 				}
 			});
+			mapper.setFilters(prop.getFilter());
+
 		}
 		if (prop.getInclude() != null)
 			mapper.setSerializationInclusion(prop.getInclude());

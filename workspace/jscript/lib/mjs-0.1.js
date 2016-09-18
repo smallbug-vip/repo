@@ -1,6 +1,24 @@
 (function(window) {
 
-	function BaseClass() {}
+	var inited = false;
+	var initValidator = function(){
+		//add method to validator framework of jquery, the effect of method is according regular exception to validate data
+		if(jQuery.validator!=null){
+			jQuery.validator.addMethod("reg", function(value, element, regular) {
+				if(Array.isArray(regular)){
+					return this.optional(element) 
+						|| new RegExp(regular[0],regular[1]).test(value);
+				}else{
+					return this.optional(element) 
+						|| new RegExp(regular).test(value);
+				}
+			});
+		}
+	}
+	
+	function BaseClass() {
+		
+	}
 
 	var util = {
 		//for info convenience
@@ -19,15 +37,21 @@
 
 	var base = {
 		version: "mjs-0.1",
+		init : function(){
+			if(inited)
+				return;
+			initValidator();
+			inited = true;
+		},
 		extend: function() {
-			if (arguments.length > 0) {
+			if (arguments.length > 0) {//object extend argument
 				for (var i = 0; i < arguments.length; i++) {
 					window.jQuery.extend(this, arguments[i]);
 				}
 			}
 			return this;
 		},
-		context: function(mjs) {
+		context: function(mjs) {//get context of application
 			return mjs.context ? mjs.context : (function() {
 				var basepath = webroot = document.location.href;
 				webroot = webroot.substring(webroot.indexOf('//') + 2, webroot.length);
