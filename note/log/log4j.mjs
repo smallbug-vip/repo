@@ -22,13 +22,18 @@ log4j.logger.cn.smallbug=DEBUG
 
 
 
-	%t：当前线程；
-	%l：输出日志的Java类相关信息。
-	%m：信息本身；
-	%c：日志器的名称；
-	%d：日期，还可以指定日期的格式，例如：%d{yyyy-MM-dd HH:mm:ss}；
-	%p：日志级别；
-	%n：换行；
+	%m 输出代码中指定的消息
+　　%p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL
+　　%r 输出自应用启动到输出该log信息耗费的毫秒数
+　　%c 输出所属的类目，通常就是所在类的全名
+　　%t 输出产生该日志事件的线程名
+　　%n 输出一个回车换行符，Windows平台为“rn”，Unix平台为“n”
+　　%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921
+　　%l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)
+
+
+
+
 
 
 	FATAL：重大错误，例如系统崩溃；
@@ -82,3 +87,19 @@ log4j.appender.SL.layout.ConversionPattern=%d{yyyy-MM-dd HH\:mm\:ss,SSS}[%c][%p]
 6.trace   最详细的细节信息
 
 默认的消息优先级为info
+
+
+@Resource
+private SysLogService sysLogService;
+
+private void updUserLog(String operate, HttpServletRequest request, SysUser user) {
+	SysLogNew log = new SysLogNew();
+	log.setIp(request.getRemoteAddr());
+	log.setUserName(request.getUserPrincipal().getName());
+	String info = operate + " | 用户名称：" + user.getUserName() + " | 用户ID：" + user.getId();
+	log.setOperate(operate);
+	log.setNodeName("用户管理");
+	log.setContent(info);
+	logger.info(info);
+	sysLogService.save(log);
+}

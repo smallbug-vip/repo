@@ -91,10 +91,8 @@ TrailingSpaces这款插件能高亮显示多余的空格和Tab
 Tag插件这是HTML/XML标签缩进、补全、排版和校验工具
 Terminal插件可以允许在Sublime Text 3中打开cmd命令窗口				//即可使用快捷键Ctrl+Shift+T呼出命令行窗口
 SublimeCodeIntel插件				这是一款代码提示插件，支持多种编程语言
-CssComb是为CSS属性进行排序和格式化插件				它依赖于Node.js [官网]
-git 集成了git的所有命令
-
-
+SublimePythonIDE
+Python PEP8 Autoformat    Ctrl+Shift+R格式化代码
 
 
 Ctrl+Shift+P：打开命令面板
@@ -133,3 +131,31 @@ Shift+右键拖动：光标多不，用来更改或插入列内容
 html:5 或者 ! 生成 HTML5 结构
 html:xt 生成 HTML4 过渡型
 html:4s 生成 HTML4 严格型
+
+
+
+
+[
+  // 代码提示
+  { "keys": ["alt+/"], "command": "auto_complete" },
+  // 当前行和下面一行交互位置
+  { "keys": ["alt+up"], "command": "swap_line_up" },
+  { "keys": ["alt+down"], "command": "swap_line_down" },
+  // 复制当前行到上一行
+  { "keys": ["ctrl+alt+up"], "command": "run_macro_file", "args": {"file": "Packages/User/duplicate_line_up.sublime-macro"} },
+  // 复制当前行到下一行
+  { "keys": ["ctrl+alt+down"], "command": "duplicate_line" },
+  // 大小写转换
+  // { "keys": ["ctrl+shift+z"], "command": "swap_case" },
+  { "keys": ["ctrl+shift+x"], "command": "upper_case" },
+  { "keys": ["ctrl+shift+y"], "command": "lower_case" },
+  // 在当前行的下一行插入空行(这时鼠标可以在当前行的任一位置, 不一定是最后)
+  { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
+  // 打开源码文件
+  { "keys": ["ctrl+shift+r"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+  // 文件内查找/替换
+  { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "replace"} },
+  // 全局查找/替换, 在查询结果中双击跳转到匹配位置
+  { "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+ 
+]

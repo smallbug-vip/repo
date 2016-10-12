@@ -51,14 +51,14 @@
 			}
 			return this;
 		},
-		context: function(mjs) {//get context of application
+		context: function(mjs) { //get context of application
 			return mjs.context ? mjs.context : (function() {
-				var basepath = webroot = document.location.href;
-				webroot = webroot.substring(webroot.indexOf('//') + 2, webroot.length);
-				webroot = webroot.substring(webroot.indexOf('/') + 1, webroot.length);
-				webroot = webroot.substring(0, webroot.indexOf('/'));
-				var rootpath = "/" + webroot;
-				mjs.context = basepath.substring(0, basepath.indexOf(rootpath) + rootpath.length);
+				var curWwwPath = window.document.location.href;
+				var pathName = window.document.location.pathname;
+				var pos = curWwwPath.indexOf(pathName);
+				var localhostPaht = curWwwPath.substring(0, pos);
+				var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+				mjs.context = localhostPaht + projectName;
 				return mjs.context;
 			})();
 		}(this)

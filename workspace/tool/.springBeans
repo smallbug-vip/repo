@@ -11,6 +11,7 @@
 		<config>src/main/resources/spring/spring-redis.xml</config>
 		<config>src/main/resources/spring/spring-ehcache.xml</config>
 		<config>src/main/resources/spring/spring-aop.xml</config>
+		<config>src/main/resources/spring/spring-data.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

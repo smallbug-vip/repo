@@ -37,3 +37,22 @@ layer.msg('也可以这样', {
     time: 20000,
     btn: ['明白了', '知道了']
 });
+
+
+
+
+if('${result_information}')
+			layer.msg('${result_information}');
+
+	/**
+	 * 将结果结果显示在客户端
+	 * 
+	 * @timestamp 2016年9月24日 下午1:39:26
+	 * @param request
+	 */
+	private void showInformation(HttpServletRequest request) {
+		Object obj = request.getSession().getAttribute(INFORMATION);
+		if (obj != null)
+			request.setAttribute(INFORMATION, obj);
+		request.getSession().removeAttribute(INFORMATION);
+	}
