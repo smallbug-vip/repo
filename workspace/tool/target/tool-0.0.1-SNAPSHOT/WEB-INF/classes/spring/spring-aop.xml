@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<bean id="studentDao" class="com.github.smallbug.tool.spring.aop.StudentDaoImpl"></bean>
+	<bean id="transaction" class="com.github.smallbug.tool.spring.aop.Transaction"></bean>
+
+	<aop:config>
+		<!-- 切入点表达式 确定目标类 -->
+		<aop:pointcut expression="execution(* com.github.smallbug.tool.spring.aop.StudentDaoImpl.*(..))" id="perform" />
+		<!-- ref指向的对象就是切面 -->
+		<aop:aspect ref="transaction">
+			<!-- 前置通知 1、在目标方法执行之前 2、获取不到目标方法的返回值 -->
+			<aop:before method="beginTransaction" pointcut-ref="perform"/>
+			<!-- 后置通知 1、后置通知可以获取到目标方法的返回值 2、当目标方法抛出异常，后置通知将不再执行 -->
+			<aop:after-returning method="commit" pointcut-ref="perform" returning="val"/>
+			<!-- 最终通知 无论目标方法是否抛出异常都将执行 -->
+			<aop:after method="finallyMethod" pointcut-ref="perform" />
+			<!-- 异常通知 -->
+			<aop:after-throwing method="throwingMethod" throwing="ex" pointcut-ref="perform" />
+			<!-- 环绕通知 能控制目标方法的执行 前置通知和后置通知能在目标方法的前面和后面加一些代码，但是不能控制目标方法的执行 -->
+			<aop:around method="aroundMethod" pointcut-ref="perform" />
+		</aop:aspect>
+	</aop:config>
+</beans>

@@ -61,4 +61,5 @@ public class HashTest extends AbstractJunit {
 		// 返回所有值
 		System.out.println(Arrays.toString(h.values("name").toArray()));
 	}
+
 }

@@ -15,6 +15,8 @@ package com.github.smallbug.tool.jdk.test;
 public class Keywords {
 	public static void main(String[] args) {
 
+		B b = new B();
+		b.as();
 	}
 }
 
@@ -26,7 +28,7 @@ class A {
 	}
 
 	public static void as() {
-
+		System.out.println("ssw");
 	}
 
 	public final void af() {
@@ -40,7 +42,7 @@ class B extends A {
 	}
 
 	public static void as() {
-
+		System.out.println("sas");
 	}
 
 	public native void an();

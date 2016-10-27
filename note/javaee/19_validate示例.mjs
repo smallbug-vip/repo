@@ -1,21 +1,20 @@
-	
-	required:true		±ØÐëÊäÈëµÄ×Ö¶Î¡£
-	remote:"check.php"	Ê¹ÓÃ ajax ·½·¨µ÷ÓÃ check.php ÑéÖ¤ÊäÈëÖµ¡£
-	email:true			±ØÐëÊäÈëÕýÈ·¸ñÊ½µÄµç×ÓÓÊ¼þ¡£
-	url:true			±ØÐëÊäÈëÕýÈ·¸ñÊ½µÄÍøÖ·¡£
-	date:true			±ØÐëÊäÈëÕýÈ·¸ñÊ½µÄÈÕÆÚ¡£ÈÕÆÚÐ£Ñé ie6 ³ö´í£¬É÷ÓÃ¡£
-	dateISO:true		±ØÐëÊäÈëÕýÈ·¸ñÊ½µÄÈÕÆÚ£¨ISO£©£¬ÀýÈç£º2009-06-23£¬1998/01/22¡£Ö»ÑéÖ¤¸ñÊ½£¬²»ÑéÖ¤ÓÐÐ§ÐÔ¡£
-	number:true			±ØÐëÊäÈëºÏ·¨µÄÊý×Ö£¨¸ºÊý£¬Ð¡Êý£©¡£
-	digits:true			±ØÐëÊäÈëÕûÊý¡£
-	creditcard:			±ØÐëÊäÈëºÏ·¨µÄÐÅÓÃ¿¨ºÅ¡£
-	equalTo:"#field"	ÊäÈëÖµ±ØÐëºÍ #field ÏàÍ¬¡£
-	accept:				ÊäÈëÓµÓÐºÏ·¨ºó×ºÃûµÄ×Ö·û´®£¨ÉÏ´«ÎÄ¼þµÄºó×º£©¡£
-	maxlength:5			ÊäÈë³¤¶È×î¶àÊÇ 5 µÄ×Ö·û´®£¨ºº×ÖËãÒ»¸ö×Ö·û£©¡£
-	minlength:10		ÊäÈë³¤¶È×îÐ¡ÊÇ 10 µÄ×Ö·û´®£¨ºº×ÖËãÒ»¸ö×Ö·û£©¡£
-	rangelength:[5,10]	ÊäÈë³¤¶È±ØÐë½éÓÚ 5 ºÍ 10 Ö®¼äµÄ×Ö·û´®£¨ºº×ÖËãÒ»¸ö×Ö·û£©¡£
-	range:[5,10]		ÊäÈëÖµ±ØÐë½éÓÚ 5 ºÍ 10 Ö®¼ä¡£
-	max:5				ÊäÈëÖµ²»ÄÜ´óÓÚ 5¡£
-	min:10				ÊäÈëÖµ²»ÄÜÐ¡ÓÚ 10¡£
+ï»¿required:true		å¿…é¡»è¾“å…¥çš„å­—æ®µã€‚
+	remote:"check.php"	ä½¿ç”¨ ajax æ–¹æ³•è°ƒç”¨ check.php éªŒè¯è¾“å…¥å€¼ã€‚
+	email:true			å¿…é¡»è¾“å…¥æ­£ç¡®æ ¼å¼çš„ç”µå­é‚®ä»¶ã€‚
+	url:true			å¿…é¡»è¾“å…¥æ­£ç¡®æ ¼å¼çš„ç½‘å€ã€‚
+	date:true			å¿…é¡»è¾“å…¥æ­£ç¡®æ ¼å¼çš„æ—¥æœŸã€‚æ—¥æœŸæ ¡éªŒ ie6 å‡ºé”™ï¼Œæ…Žç”¨ã€‚
+	dateISO:true		å¿…é¡»è¾“å…¥æ­£ç¡®æ ¼å¼çš„æ—¥æœŸï¼ˆISOï¼‰ï¼Œä¾‹å¦‚ï¼š2009-06-23ï¼Œ1998/01/22ã€‚åªéªŒè¯æ ¼å¼ï¼Œä¸éªŒè¯æœ‰æ•ˆæ€§ã€‚
+	number:true			å¿…é¡»è¾“å…¥åˆæ³•çš„æ•°å­—ï¼ˆè´Ÿæ•°ï¼Œå°æ•°ï¼‰ã€‚
+	digits:true			å¿…é¡»è¾“å…¥æ•´æ•°ã€‚
+	creditcard:			å¿…é¡»è¾“å…¥åˆæ³•çš„ä¿¡ç”¨å¡å·ã€‚
+	equalTo:"#field"	è¾“å…¥å€¼å¿…é¡»å’Œ #field ç›¸åŒã€‚
+	accept:				è¾“å…¥æ‹¥æœ‰åˆæ³•åŽç¼€åçš„å­—ç¬¦ä¸²ï¼ˆä¸Šä¼ æ–‡ä»¶çš„åŽç¼€ï¼‰ã€‚
+	maxlength:5			è¾“å…¥é•¿åº¦æœ€å¤šæ˜¯ 5 çš„å­—ç¬¦ä¸²ï¼ˆæ±‰å­—ç®—ä¸€ä¸ªå­—ç¬¦ï¼‰ã€‚
+	minlength:10		è¾“å…¥é•¿åº¦æœ€å°æ˜¯ 10 çš„å­—ç¬¦ä¸²ï¼ˆæ±‰å­—ç®—ä¸€ä¸ªå­—ç¬¦ï¼‰ã€‚
+	rangelength:[5,10]	è¾“å…¥é•¿åº¦å¿…é¡»ä»‹äºŽ 5 å’Œ 10 ä¹‹é—´çš„å­—ç¬¦ä¸²ï¼ˆæ±‰å­—ç®—ä¸€ä¸ªå­—ç¬¦ï¼‰ã€‚
+	range:[5,10]		è¾“å…¥å€¼å¿…é¡»ä»‹äºŽ 5 å’Œ 10 ä¹‹é—´ã€‚
+	max:5				è¾“å…¥å€¼ä¸èƒ½å¤§äºŽ 5ã€‚
+	min:10				è¾“å…¥å€¼ä¸èƒ½å°äºŽ 10ã€‚
 
 
 //////////////////////////////////////////////////////////
@@ -39,18 +38,18 @@ $("#sport_product_mod_form").validate({
 		},
 		messages: {
 			productId: {
-				required: "ÉÌÆ·ID²»ÄÜÎª¿Õ£¡",
-				remote: "ÉÌÆ·ID²»ÄÜÖØ¸´£¡"
+				required: "å•†å“IDä¸èƒ½ä¸ºç©ºï¼",
+				remote: "å•†å“IDä¸èƒ½é‡å¤ï¼"
 		    },
 		    productName: {
-		    	required: "ÉÌÆ·Ãû²»ÄÜÎª¿Õ£¡"
+		    	required: "å•†å“åä¸èƒ½ä¸ºç©ºï¼"
 		    },
 		    price: {
-		    	required: "¼Û¸ñ²»ÄÜÎª¿Õ£¡",
-		    	number:"ÇëÊäÈëÓÐÐ§Êý×Ö£¡"
+		    	required: "ä»·æ ¼ä¸èƒ½ä¸ºç©ºï¼",
+		    	number:"è¯·è¾“å…¥æœ‰æ•ˆæ•°å­—ï¼"
 		    },
 		    strategyGroupId: {
-		    	required: "¾ö²ß×éID²»ÄÜÎª¿Õ£¡"
+		    	required: "å†³ç­–ç»„IDä¸èƒ½ä¸ºç©ºï¼"
 		    }
 		},
 		errorPlacement: function(error, element) {

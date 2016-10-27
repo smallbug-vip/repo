@@ -23,7 +23,7 @@
 	</configuration>
 </plugin>
 
-<!-- 从本地Maven仓库复制到某个特定的文件夹下面 ;命令：dependency:copy-dependencies -->
+<!-- 从本地Maven仓库复制到某个特定的文件夹下面 ;命令：dependency:copy-dependencies -DoutputDirectory=lib-->
 <plugin>
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-dependency-plugin</artifactId>

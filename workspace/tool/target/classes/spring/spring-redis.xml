@@ -7,10 +7,24 @@
 		http://www.springframework.org/schema/redis http://www.springframework.org/schema/redis/spring-redis-1.0.xsd">
 
 
-	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-		<property name="hostName" value="192.168.227.129" />
-		<property name="port" value="6379" />
-		<property name="password" value="" />
+	<bean id="jedisConnectionFactory" class="com.github.smallbug.tool.database.redis.JedisConnectionFactory2">
+		<property name="poolConfig" ref="jedisPoolConfig"></property>
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
+
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig" />
+		<constructor-arg name="host" value="192.168.227.130" />
+		<constructor-arg name="port" value="6379" />
+	</bean>
+	
+	<!-- Jedis 连接池配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxWaitMillis" value="10000" />
+		<property name="testOnBorrow" value="true" />
+		<property name="maxTotal" value="100" />
+		<property name="maxIdle" value="100"></property>
+		<property name="minIdle" value="100"></property>
 	</bean>
 
 	<!-- jedisTemplate 配置 -->

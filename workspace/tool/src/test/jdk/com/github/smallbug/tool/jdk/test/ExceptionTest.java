@@ -1,6 +1,7 @@
 package com.github.smallbug.tool.jdk.test;
 
 public class ExceptionTest {
+
 	public static void main(String[] args) {
 		ExceptionTest t = new ExceptionTest();
 		System.out.println(t.show());
@@ -17,7 +18,6 @@ public class ExceptionTest {
 		}
 		finally {
 			System.out.println("sss");
-
 		}
 	}
 }
