@@ -2,6 +2,7 @@ package com.github.smallbug.tool.database.dbcp;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -25,4 +26,13 @@ public class DbcpDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	public void save1() {
+		try {
+			jdbcTemplate.update("INSERT INTO aa (name) VALUES (?)", "aa你还啊在家吗地a");
+		}
+		catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

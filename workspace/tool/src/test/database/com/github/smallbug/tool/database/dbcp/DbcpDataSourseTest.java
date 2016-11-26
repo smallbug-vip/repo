@@ -18,4 +18,9 @@ public class DbcpDataSourseTest extends AbstractJunit {
 		c.setName("小猫1");
 		dbcpDao.save(c);
 	}
+
+	@Test
+	public void t2() {
+		dbcpDao.save1();
+	}
 }

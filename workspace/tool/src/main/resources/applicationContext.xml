@@ -14,8 +14,8 @@
 			</list>
 		</property>
 	</bean>
-	<import resource="./spring/spring-redis.xml" />
+<!-- 	<import resource="./spring/spring-redis.xml" /> -->
 	<!-- <import resource="./spring/spring-ehcache.xml" /> -->
 	<!-- <import resource="./spring/spring-aop.xml" /> -->
-<!-- 	<import resource="./spring/spring-data.xml" /> -->
+	<import resource="./spring/spring-data.xml" />
 </beans>
